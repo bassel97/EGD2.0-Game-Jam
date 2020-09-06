@@ -15,6 +15,7 @@ public class JumpMechanic : MonoBehaviour
     //**************************** Serialized Vars *******************************//
     [SerializeField] float jumpHeight = 1;
     [SerializeField] float characterHeight = 1;
+    [SerializeField] float characterWidth = 1;
 
     //**************************** Public Vars *******************************//
 
@@ -43,7 +44,8 @@ public class JumpMechanic : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, characterHeight / 2 + 0.15f);
+        isGrounded = Physics.Raycast(transform.position + transform.right * characterWidth / 2, -Vector3.up, characterHeight / 2 + 0.15f) ||
+            Physics.Raycast(transform.position - transform.right * characterWidth / 2, -Vector3.up, characterHeight / 2 + 0.15f);
     }
 
     public void Jump()
